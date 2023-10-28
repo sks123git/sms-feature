@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.content.ContextCompat
 import android.Manifest.permission
+import android.content.Intent
 import android.os.Build.VERSION
 import android.telephony.SmsManager
 import android.widget.Toast
@@ -17,20 +18,30 @@ class MainActivity : AppCompatActivity() {
     lateinit var message: EditText
     lateinit var phoneNo: EditText
     lateinit var buttonSend: Button
+    lateinit var buttonSendMail: Button
     var userMessage: String = ""
     var userPhoneNumber: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        message = findViewById(R.id.textMessage)
-        phoneNo = findViewById(R.id.phoneNumber)
-        buttonSend = findViewById(R.id.send)
-
+        configureComponents()
         buttonSend.setOnClickListener {
             userMessage = message.text.toString()
             userPhoneNumber = phoneNo.text.toString()
 
             sendSMS(userMessage,userPhoneNumber)
+        }
+    }
+
+    private fun configureComponents() {
+        message = findViewById(R.id.textMessage)
+        phoneNo = findViewById(R.id.phoneNumber)
+        buttonSend = findViewById(R.id.send)
+        buttonSendMail = findViewById(R.id.createMail)
+
+        buttonSendMail.setOnClickListener {
+            val intent = Intent(this@MainActivity,MailActivity::class.java)
+            startActivity(intent)
         }
     }
 
