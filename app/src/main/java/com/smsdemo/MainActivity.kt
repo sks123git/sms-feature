@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var phoneNo: EditText
     lateinit var buttonSend: Button
     lateinit var buttonSendMail: Button
+    lateinit var buttonCall: Button
     var userMessage: String = ""
     var userPhoneNumber: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,9 +39,15 @@ class MainActivity : AppCompatActivity() {
         phoneNo = findViewById(R.id.phoneNumber)
         buttonSend = findViewById(R.id.send)
         buttonSendMail = findViewById(R.id.createMail)
+        buttonCall = findViewById(R.id.giveCall)
 
         buttonSendMail.setOnClickListener {
             val intent = Intent(this@MainActivity,MailActivity::class.java)
+            startActivity(intent)
+        }
+
+        buttonCall.setOnClickListener {
+            val intent = Intent(this@MainActivity,CallActivity::class.java)
             startActivity(intent)
         }
     }
